@@ -1,5 +1,5 @@
 # Contents
-Stata DTA files that are in version 17's sysuse directory.
+Stata DTA files that are in version 17's sysuse directory, as well as the small stata .do file used to save the .dta files locally.
 
 # Purpose
 This is to allow easy use of example data files to compare analyses between Stata and other programs (R, Julia, Python, etc).

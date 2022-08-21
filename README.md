@@ -19,10 +19,22 @@ For auto.dta, this will look like `https://github.com/acwatt/stataDataFiles/raw/
 `https://github.com/acwatt/stataDataFiles/raw/main/[dataset name].dta`
 Then the code below will load the file in R from the web:
 ```
-install.packages("haven")  # only need this if it's not installed
+install.packages("haven")  # only need this if haven is not installed
 library(haven)  # load the read_dta function
-auto <- read_dta("https://github.com/acwatt/stataDataFiles/raw/main/auto.dta")
+url <- "https://github.com/acwatt/stataDataFiles/raw/main/auto.dta"
+auto <- read_dta(url)
 ```
 
 ## Julia
-For loading in Julia, first get the url for the .dta file (see the [R section above](
+For loading in Julia, first get the url for the .dta file (see the [R section](https://github.com/acwatt/stataDataFiles/tree/main#r) above). Then use the following code to load the file from the web:
+```
+using Pkg
+Pkg.add(["StatFiles", "FileIO", "DataFrames"])  # only need these two lines if not installed 
+using StatFiles, DataFrames, Downloads
+url = "https://github.com/acwatt/stataDataFiles/raw/main/auto.dta"
+file = last(split(url,"/"))
+download(url, file)
+df = load(file) |> DataFrame
+rm(file)
+```
+*Note: there might be a way to load a dta files from url, but I was not able to find it in the StatFiles documentation. `download()` by default creates a temporary file, but `StatFiles.load()` was unable to determine that the temporary file (which has the .tmp extension instead of .dta) was a stata file. There seems to be a way to pass the file type directly to `StatFiles.load()`, but was not well documented and I could not find the correct syntax. Downloading the file locally, loading, and then deleting seems to be the most straight-forward way of loading from a url.

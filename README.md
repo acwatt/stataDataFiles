@@ -38,3 +38,7 @@ df = load(file) |> DataFrame
 rm(file)
 ```
 *Note: there might be a way to load a dta files from url, but I was not able to find it in the StatFiles documentation. `download()` by default creates a temporary file, but `StatFiles.load()` was unable to determine that the temporary file (which has the .tmp extension instead of .dta) was a stata file. There seems to be a way to pass the file type directly to `StatFiles.load()`, but was not well documented and I could not find the correct syntax. Downloading the file locally, loading, and then deleting seems to be the most straight-forward way of loading from a url.
+
+
+# Saving the `sysuse` data files from Stata
+I used the do file `saving sysuse dta files.do` to save all the built-in stata .dta files to a local computer. Then I uploaded those files to this repo.
